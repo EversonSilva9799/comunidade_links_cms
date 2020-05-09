@@ -4,7 +4,7 @@
   "description": "sistema de postagems de links para a comunidade",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node --exec sucrase-node index.js",
     "dev": "nodemon --exec sucrase-node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
