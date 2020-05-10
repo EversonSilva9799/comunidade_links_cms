@@ -1,6 +1,6 @@
-import Link from './../../models/link/Link';
-import Post from './../../models/post/Post';
-import Response from './../../models/Response';
+const Link = require('./../../models/link/Link');
+const Post = require('./../../models/post/Post');
+const Response = require('./../../models/Response');
 
 class LinkController {
   async index(req, res) {
@@ -88,4 +88,4 @@ class LinkController {
   }
 }
 
-export default new LinkController();
+module.exports = new LinkController();

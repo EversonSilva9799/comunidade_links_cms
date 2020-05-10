@@ -10,4 +10,4 @@ const Rule = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('Rule', Rule);
+module.exports = mongoose.model('Rule', Rule);

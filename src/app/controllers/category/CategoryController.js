@@ -1,6 +1,6 @@
-import Category from './../../models/category/Category';
-import Response from './../../models/Response';
-import generateSlug from './../../utils/generateSlug';
+const Category = require('./../../models/category/Category');
+const Response = require('./../../models/Response');
+const generateSlug = require('./../../utils/generateSlug');
 
 class CategoryController {
   async index(req, res) {
@@ -85,4 +85,4 @@ class CategoryController {
   }
 }
 
-export default new CategoryController();
+module.exports = new CategoryController();

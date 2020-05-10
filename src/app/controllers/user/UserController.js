@@ -1,5 +1,5 @@
-import Response from './../../models/Response';
-import User from './../../models/user/User';
+const Response = require('./../../models/Response');
+const User = require('./../../models/user/User');
 
 class UserController {
   async index(req, res) {
@@ -59,4 +59,4 @@ class UserController {
   }
 }
 
-export default new UserController();
+module.exports = new UserController();

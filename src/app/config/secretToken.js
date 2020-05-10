@@ -3,4 +3,4 @@ const authConfig = {
   expiresIn: 8800,
 };
 
-export default authConfig;
+module.exports = authConfig;

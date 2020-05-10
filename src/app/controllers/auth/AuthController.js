@@ -1,5 +1,5 @@
-import Response from './../../models/Response';
-import User from './../../models/user/User';
+const Response = require('./../../models/Response');
+const User = require('./../../models/user/User');
 
 class AuthController {
   async store(req, res) {
@@ -29,4 +29,4 @@ class AuthController {
   }
 }
 
-export default new AuthController();
+module.exports = new AuthController();

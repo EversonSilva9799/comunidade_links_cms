@@ -44,4 +44,4 @@ let generateSlug = function(partsLink) {
   }
 };
 
-export default generateSlug;
+module.exports = generateSlug;

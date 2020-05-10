@@ -1,9 +1,9 @@
-import { Router } from 'express';
-import categoryRoutes from './category';
-import postRoutes from './post';
-import linkRoutes from './link';
-import authRoutes from './auth';
-import userRoutes from './user';
+const { Router } = require('express');
+const categoryRoutes = require('./category');
+const postRoutes = require('./post');
+const linkRoutes = require('./link');
+const authRoutes = require('./auth');
+const userRoutes = require('./user');
 const routes = Router();
 
 routes.use(categoryRoutes);
@@ -12,4 +12,4 @@ routes.use(linkRoutes);
 routes.use(authRoutes);
 routes.use(userRoutes);
 
-export default routes;
+module.exports = routes;

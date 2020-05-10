@@ -1,7 +1,7 @@
-import Post from './../../models/post/Post';
-import Category from './../../models/category/Category';
-import Response from './../../models/Response';
-import generateSlug from './../../utils/generateSlug';
+const Post = require('./../../models/post/Post');
+const Category = require('./../../models/category/Category');
+const Response = require('./../../models/Response');
+const generateSlug = require('./../../utils/generateSlug');
 
 class PostController {
   async index(req, res) {
@@ -123,4 +123,4 @@ class PostController {
   }
 }
 
-export default new PostController();
+module.exports = new PostController();

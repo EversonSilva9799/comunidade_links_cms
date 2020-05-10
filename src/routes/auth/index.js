@@ -1,7 +1,7 @@
-import { Router } from 'express';
-import AuthController from '../../app/controllers/auth/AuthController';
+const { Router } = require('express');
+const AuthController = require('../../app/controllers/auth/AuthController');
 const routes = Router();
 
 routes.post('/auth', AuthController.store);
 
-export default routes;
+module.exports = routes;
