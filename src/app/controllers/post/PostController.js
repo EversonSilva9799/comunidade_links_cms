@@ -6,7 +6,21 @@ const generateSlug = require('./../../utils/generateSlug');
 class PostController {
   async index(req, res) {
     try {
-      const posts = await Post.find().sort({ createdAt: -1 });
+      const filters = {};
+      let { page, limit, search } = req.query;
+
+      if (limit && limit > 15) {
+        limit = 15;
+      }
+
+      if (search) {
+        filters.title = new RegExp(search, 'i');
+      }
+
+      const posts = await Post.paginate(filters, {
+        page: page || 1,
+        limit: Number(limit) || 10,
+      });
       return res.status(200).json(new Response(200, 'sucesso', posts));
     } catch (err) {
       return res.status(500).json(new Response(500, 'Erro interno', null));
