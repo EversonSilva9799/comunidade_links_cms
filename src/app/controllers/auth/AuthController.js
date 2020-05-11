@@ -14,6 +14,14 @@ class AuthController {
           .json(new Response(400, 'credencias incorretas', null));
       }
 
+      if (!user.activated) {
+        return res
+          .status(401)
+          .json(
+            new Response(401, 'Acesse seu email para ativar sua conta', null)
+          );
+      }
+
       if (!(await user.checkPassword(password))) {
         return res
           .status(400)
