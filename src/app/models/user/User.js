@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
-const authConfig = require('./../../config/secretToken');
+const authConfig = require('./../../../config/secretToken');
 
 const User = new mongoose.Schema(
   {
@@ -21,6 +21,17 @@ const User = new mongoose.Schema(
       type: String,
       default: 'USER',
       enum: ['USER', 'ADMIN', 'GESTOR'],
+    },
+    activated: {
+      type: Boolean,
+      default: false,
+    },
+    codeActiveAccount: {
+      type: String,
+      required: true,
+    },
+    codeManageAccount: {
+      type: String,
     },
   },
   {
