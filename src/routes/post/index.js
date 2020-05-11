@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const PostController = require('./../../app/controllers/post/PostController');
 const multer = require('multer');
-const uploadConfig = require('../../app/config/upload');
+const uploadConfig = require('../../config/upload');
 const routes = Router();
 const upload = multer(uploadConfig);
 const auth = require('../../app/middlewares/auth');
