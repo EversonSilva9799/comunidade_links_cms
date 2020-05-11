@@ -1,6 +1,7 @@
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const routes = require('./routes');
 
 class App {
@@ -15,12 +16,16 @@ class App {
   middlewares() {
     this.express.use(cors());
     this.express.use(express.json());
+    this.express.use(
+      '/images',
+      express.static(path.resolve(__dirname, '..', 'uploads'))
+    );
   }
 
   database() {
-    //let url = 'mongodb://localhost:27017/comunidade';
-    let url =
-      'mongodb+srv://everson:UOGmwFRLpJPztoeT@cluster0-qcdjs.mongodb.net/comunidade?retryWrites=true&w=majority';
+    let url = 'mongodb://localhost:27017/comunidade';
+    //let url =
+    //'mongodb+srv://everson:UOGmwFRLpJPztoeT@cluster0-qcdjs.mongodb.net/comunidade?retryWrites=true&w=majority';
     mongoose.connect(url, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
