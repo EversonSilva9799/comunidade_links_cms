@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const Response = require('./../models/Response');
-const authConfig = require('./../config/secretToken');
+const authConfig = require('./../../config/secretToken');
 
 const auth = async (req, res, next) => {
   const authHeader = req.headers.authorization;
