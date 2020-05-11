@@ -1,5 +1,7 @@
 const Response = require('./../../models/Response');
 const User = require('./../../models/user/User');
+const crypto = require('crypto');
+const Mail = require('../../../lib/Mail');
 
 class UserController {
   async index(req, res) {
@@ -23,15 +25,33 @@ class UserController {
           .json(new Response(400, 'email já está sendo utilizado', null));
       }
 
-      const user = await User.create({ name, email, password });
+      let code = crypto.randomBytes(30).toString('hex');
 
-      return res.status(201).json(new Response(201, 'sucesso', user));
+      const user = await User.create({
+        name,
+        email,
+        password,
+        codeActiveAccount: code,
+      });
+
+      await Mail.sendMail({
+        to: `${user.name} <${user.email}>`,
+        subject: 'Comunidade Links - Ativação de conta',
+        html: `<h2>Clique no link para ativar sua conta</h2>
+        <p>
+          <a href="http://localhost:3000/api/contas/ativar/${code}">ATIVAR</a>
+        </p>`,
+      });
+
+      return res
+        .status(201)
+        .json(
+          new Response(201, 'Acesse seu email para ativar saua conta', null)
+        );
     } catch (err) {
-      if (err.name === 'ValidationError') {
-        return res
-          .status(400)
-          .json(new Response(400, 'Dados incorretos informados', null));
-      }
+      return res
+        .status(400)
+        .json(new Response(400, 'Dados incorretos informados', err.message));
     }
   }
 
