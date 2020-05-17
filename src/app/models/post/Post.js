@@ -28,6 +28,10 @@ const Post = new mongoose.Schema(
       type: String,
       required: true,
     },
+    views: {
+      tytpe: Number,
+      default: 0,
+    },
     links: [{ type: Schema.Types.ObjectId, ref: 'Link' }],
     category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
   },
