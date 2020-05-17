@@ -13,9 +13,7 @@ class AccountController {
       );
 
       if (!user) {
-        return res
-          .status(404)
-          .json(new Response(404, 'Usuário não encontrado', null));
+        return res.status(404).json(new Response(404, 'Código inválido', null));
       }
 
       if (user.activated) {
@@ -35,40 +33,56 @@ class AccountController {
   }
 
   async post(req, res) {
-    const { email } = req.body;
+    try {
+      const { email } = req.body;
 
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res
-        .status(404)
-        .json(
-          new Response(404, 'E-mail não encontrado na base de dados', null)
-        );
-    }
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res
+          .status(404)
+          .json(
+            new Response(404, 'E-mail não encontrado na base de dados', null)
+          );
+      }
 
-    let code = crypto.randomBytes(30).toString('hex');
+      let code = crypto.randomBytes(30).toString('hex');
 
-    user.codeManageAccount = code;
-    await user.save();
+      user.codeManageAccount = code;
+      await user.save();
 
-    await Mail.sendMail({
-      to: `${user.name} <${user.email}>`,
-      subject: 'Comunidade Link - Renovar senha',
-      html: `<h2>Clique no link para escolher uma nova senha</h2>
+      try {
+        await Mail.sendMail({
+          to: `${user.name} <${user.email}>`,
+          subject: 'Comunidade Link - Renovar senha',
+          html: `<h2>Clique no link para escolher uma nova senha</h2>
         <p>
-          <a href="http://localhost:3000/api/contas/senhas/${code}">Recuperar Senha</a>
+          <a href="http://localhost:4200/#/dashboard/reseta-senha/${code}">Recuperar Senha</a>
         </p>`,
-    });
+        });
+      } catch (err) {
+        return res
+          .status(500)
+          .json(
+            new Response(
+              500,
+              'Tivemos problemas ao enviar o email, tente novamente mais tarde',
+              null
+            )
+          );
+      }
 
-    return res
-      .status(201)
-      .json(
-        new Response(
-          201,
-          'Te enviamos um email para você recuperar a senha',
-          code
-        )
-      );
+      return res
+        .status(201)
+        .json(
+          new Response(
+            201,
+            'Te enviamos um email para você recuperar a senha',
+            code
+          )
+        );
+    } catch (err) {
+      return res.status(500).json(new Response(500, 'Erro Interno', null));
+    }
   }
 
   async updatePass(req, res) {
