@@ -3,7 +3,7 @@ const AccountController = require('../../app/controllers/account/AccountControll
 const routes = Router();
 
 routes.get('/contas/ativar/:code', AccountController.get);
-routes.post('/contas/esqueci-senha', AccountController.post);
-routes.put('/contas/senhas/:code', AccountController.updatePass);
+routes.post('/account/reset', AccountController.post);
+routes.put('/account/reset/:code', AccountController.updatePass);
 
 module.exports = routes;
