@@ -23,9 +23,7 @@ class App {
   }
 
   database() {
-    //let url = 'mongodb://localhost:27017/comunidade';
-    let url =
-    'mongodb+srv://everson:UOGmwFRLpJPztoeT@cluster0-qcdjs.mongodb.net/comunidade?retryWrites=true&w=majority';
+    let url = 'mongodb://localhost:27017/comunidade';
     mongoose.connect(url, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
