@@ -44,6 +44,7 @@ class PostController {
           .status(404)
           .json(new Response(404, 'post não encontrado', null));
       }
+      console.log(post);
 
       post.views = post.views + 1;
       await post.save();
@@ -64,7 +65,7 @@ class PostController {
         year,
         size,
         image,
-        password = '',
+        password,
         categoryId,
       } = req.body;
       const link = generateSlug(title);
